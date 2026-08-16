@@ -1,0 +1,48 @@
+.icon-picker {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #f8faff;
+  max-height: 300px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.icon-picker[hidden] { display: none; }
+.icon-picker button {
+  width: 100%;
+  height: auto;
+  min-height: 50px;
+  aspect-ratio: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  background: white;
+  color: #4d5870;
+  padding: 10px 12px;
+  text-align: left;
+  cursor: pointer;
+}
+.icon-picker button.selected {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  color: var(--primary-deep);
+}
+.icon-picker button::after {
+  content: attr(aria-label);
+  font-size: 14px;
+  font-weight: 700;
+  color: inherit;
+}
+.icon-picker button .habit-line-icon {
+  width: 25px;
+  height: 25px;
+  flex: 0 0 auto;
+}
