@@ -1,5 +1,4 @@
 (() => {
-  const YEAR_MS = 86400000;
   let observer = null;
   let rendering = false;
 
@@ -23,7 +22,7 @@
   }
 
   function daysInclusive(start, end) {
-    return Math.max(0, Math.floor((end - start) / YEAR_MS) + 1);
+    return Math.max(0, Math.floor((end - start) / 86400000) + 1);
   }
 
   function annualTarget(habit) {
@@ -43,23 +42,28 @@
 
   function stageFor(ratio, done) {
     if (!done) return 0;
-    if (ratio < .02) return 1;
-    if (ratio < .05) return 2;
-    if (ratio < .10) return 3;
-    if (ratio < .18) return 4;
-    if (ratio < .30) return 5;
-    if (ratio < .45) return 6;
-    if (ratio < .60) return 7;
-    if (ratio < .75) return 8;
-    if (ratio < .90) return 9;
-    return 10;
+    if (ratio < .01) return 1;
+    if (ratio < .02) return 2;
+    if (ratio < .035) return 3;
+    if (ratio < .05) return 4;
+    if (ratio < .08) return 5;
+    if (ratio < .12) return 6;
+    if (ratio < .18) return 7;
+    if (ratio < .28) return 8;
+    if (ratio < .40) return 9;
+    if (ratio < .55) return 10;
+    if (ratio < .75) return 11;
+    return 12;
   }
 
   function tree(stage) {
     if (!stage) return '<div class="garden-seed"><span></span></div>';
     if (stage === 1) return '<div class="garden-sprout"><i></i><b></b><em></em></div>';
-    const leaves = Math.min(12, stage + 2);
-    return `<div class="garden-tree stage-${stage}"><div class="tree-canopy">${Array.from({ length: leaves }, (_, i) => `<span class="leaf leaf-${i + 1}"></span>`).join('')}</div><div class="tree-trunk"></div>${stage >= 8 ? '<span class="tree-spark spark-a">✦</span><span class="tree-spark spark-b">✦</span>' : ''}</div>`;
+    const leaves = Math.min(12, Math.max(3, stage + 1));
+    const decorations = stage >= 6 ? `<span class="tree-spark spark-a">✦</span><span class="tree-spark spark-b">✦</span>` : '';
+    const fruit = stage >= 9 ? '<span class="tree-fruit fruit-a">●</span><span class="tree-fruit fruit-b">●</span><span class="tree-fruit fruit-c">●</span>' : '';
+    const flowers = stage >= 11 ? '<span class="tree-flower flower-a">✿</span><span class="tree-flower flower-b">✿</span>' : '';
+    return `<div class="garden-tree stage-${stage}"><div class="tree-canopy">${Array.from({ length: leaves }, (_, i) => `<span class="leaf leaf-${i + 1}"></span>`).join('')}</div><div class="tree-trunk"></div>${fruit}${flowers}${decorations}</div>`;
   }
 
   function escape(value) {
@@ -94,7 +98,7 @@
         const percent = Math.round(ratio * 100);
         const card = document.createElement('div');
         card.className = 'momentum-card garden-card';
-        card.innerHTML = `<div class="garden-visual"><div class="garden-sky">${tree(stage)}<div class="garden-ground"></div></div></div><div class="garden-copy"><div class="momentum-name"><span>${escape(habit.emoji || '✦')}</span><span>${escape(habit.name)}</span></div><div class="garden-stats"><strong>${done}</strong> of ${target} yearly repetitions</div><div class="garden-progress"><span style="width:${percent}%"></span></div><div class="garden-footer"><span>${percent}% of this year's ideal</span><span>${habit.frequency === 'daily' ? 'Daily' : 'Weekly'} momentum</span></div></div>`;
+        card.innerHTML = `<div class="garden-visual"><div class="garden-sky">${tree(stage)}<div class="garden-ground"></div></div></div><div class="garden-copy"><div class="momentum-name"><span>${escape(habit.emoji || '✦')}</span><span>${escape(habit.name)}</span></div><div class="garden-stats"><strong>${done}</strong> of ${target} yearly repetitions</div><div class="garden-progress"><span style="width:${percent}%"></span></div><div class="garden-footer"><span>${percent}% of this year's ideal</span><span>${stage > 0 ? `Growth stage ${stage} of 12` : 'Ready to begin'}</span></div></div>`;
         list.appendChild(card);
       });
     } catch {} finally {
