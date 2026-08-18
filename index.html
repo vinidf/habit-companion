@@ -8,8 +8,8 @@
   <title>Habit Companion</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=18">
-  <link rel="stylesheet" href="icon-picker.css?v=18">
+  <link rel="stylesheet" href="styles.css?v=19">
+  <link rel="stylesheet" href="icon-picker.css?v=19">
 </head>
 <body>
   <div class="app-shell">
@@ -46,15 +46,17 @@
   <dialog id="dataDialog" class="sheet-dialog"><div class="sheet-card compact-sheet"><div class="sheet-handle"></div><div class="sheet-header"><div><div class="eyebrow">Settings</div><h2>Habit Companion</h2></div><button type="button" class="icon-button close-button" id="dataCloseButton" aria-label="Close">×</button></div><div class="settings-label">Data</div><p class="data-copy">Your habits are stored on this device. Export a backup whenever you want a second copy.</p><div class="data-actions"><button class="secondary" id="exportButton">Export backup</button><button class="secondary" id="importButton">Import backup</button><input id="importInput" type="file" accept="application/json,.json" hidden></div><div class="storage-note"><span>✓</span><span>Offline storage enabled</span></div></div></dialog>
 
   <script>if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw-v17.js').catch(() => {});</script>
-  <script src="db.js?v=18"></script>
-  <script src="data-integrity-v14.js?v=18"></script>
-  <script src="app.js?v=18"></script>
-  <script src="week-sunday.js?v=18"></script>
-  <script src="momentum-period.js?v=18"></script>
-  <script src="icons-ui.js?v=18"></script>
-  <script src="reminders-v12.js?v=18"></script>
-  <script src="backup-v14.js?v=18"></script>
-  <script src="auto-backup-v17.js?v=18"></script>
-  <script src="retroactive-log.js?v=18"></script>
+  <script src="db.js?v=19"></script>
+  <script src="data-integrity-v14.js?v=19"></script>
+  <script src="app.js?v=19"></script>
+  <script src="week-sunday.js?v=19"></script>
+  <script src="momentum-period.js?v=19"></script>
+  <script src="momentum-fix-v19.js?v=19"></script>
+  <script src="icons-ui.js?v=19"></script>
+  <script src="reminders-v12.js?v=19"></script>
+  <script src="backup-v14.js?v=19"></script>
+  <script src="auto-backup-v17.js?v=19"></script>
+  <script src="retroactive-log.js?v=19"></script>
+  <script src="feedback-v19.js?v=19"></script>
 </body>
 </html>
